@@ -1,11 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ResultPage from './routes/results-page';
+import VotingPage from './routes/voting-page';
+import LandingPage from './routes/landing-page';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+  <Routes>
+    <Route path="/" element = {<App />}>
+      <Route path="" element = {<LandingPage />} />
+      <Route path="results" element = {<ResultPage />} />    
+      <Route path="vote" element = {<VotingPage />} />
+    </Route>
+  </Routes>
+</BrowserRouter>,
   document.getElementById('root')
 );
 
