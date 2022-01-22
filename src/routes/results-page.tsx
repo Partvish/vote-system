@@ -1,7 +1,9 @@
 import React from 'react';
 
-function ResultPage(){
+const ResultPage = ()=>{
     return <main>
+        <h1>Election Results</h1>
+        <div>Region change selector</div>
         <div>Results</div>
     </main>;
 }
