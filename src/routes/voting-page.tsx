@@ -21,7 +21,6 @@ const VotingPage = ()=>
             
             if(response.ok ){
                 const data = await response.json();
-                console.log(data.candidates)
                 if(data.candidates.length>0) {
                     setGlobalCandidates((data.candidates as any[]).filter(e=>e.in_global));
                     setRegionalCandidates((data.candidates as any[]).filter(e=>!e.in_global));
@@ -40,7 +39,6 @@ const VotingPage = ()=>
 
         }).then(async response=> {
             const data = await response.json();
-            console.log(data)
             if(response.ok && data.voter.id){
                 data.voter['key']=values.voterKey; 
                 setVoter(data.voter);
@@ -60,7 +58,9 @@ const VotingPage = ()=>
             setErrorMessage("Voter data lost, please resend your Voter Key");
             return;
         }
-        var kek = {
+ 
+
+        FetchWithHeaders('voters/vote', {
             method: 'POST',
             body: JSON.stringify({
                 'rankings_global': globalCandidates.map(e=>e.id),
@@ -68,9 +68,7 @@ const VotingPage = ()=>
                 'voter_id': voter.id,
                 'voter_key': voter.key
             })
-        }
-        console.log(kek)
-        FetchWithHeaders('voters/vote', kek 
+        } 
     ).then(response=>{
             if(response.ok){
                 setHideVoting(true);

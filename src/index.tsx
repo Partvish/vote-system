@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import App from './app';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ResultPage from './routes/results-page';
 import VotingPage from './routes/voting-page';

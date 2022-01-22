@@ -5,9 +5,14 @@ import {Outlet} from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
+    <div >
       <Header />
-      <Outlet />
+      <div >
+      <div style={{maxWidth: 1200, margin:'auto', }}>
+        <Outlet />
+        
+      </div>
+      </div>
       <Footer />
     </div>
   );

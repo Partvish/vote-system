@@ -1,0 +1,43 @@
+.menuBackground{
+    background-color: #512DA8;
+    color: #FFFFFF;
+    border-bottom: black 2px solid;
+}
+
+
+
+.menuBorder {
+    max-width: 1200px;
+    margin: auto
+}
+
+.menuContainer{
+    display: flex;
+    padding-bottom: 15px;
+}
+
+.menuButton {
+    padding: 10px;
+    border: #512DA8 1px solid;
+    font-size: 20px;
+    width: 80px;
+    text-align: center;
+    color: white;
+    font-family: Cambria;
+}
+
+.menuButton .a:visited {
+    color: white;
+}
+
+.menuButton:hover {
+    color: white;
+    background-color: #D1C4E9;
+    opacity: 1;
+}
+
+.menuTitle{
+    margin-top: 0;
+    padding-top: 15px;
+
+}

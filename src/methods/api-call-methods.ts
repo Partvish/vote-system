@@ -1,6 +1,5 @@
 const api = 'https://voting.homework.snapsoft.hu/api/';
 const apiKey = '42zsfvgtXeRlkFqtEmI2w1IK9RyO1LCg';
-console.log(apiKey)
 
 const FetchWithHeaders = (apiPoint: string, requestOptions: any, query: any = {}) => {
     if(!requestOptions.headers) {

@@ -1,0 +1,11 @@
+.landingResultContainer {
+    display: flex; 
+    flex-wrap: wrap; 
+    text-align: 'center';
+}
+
+.imageLinkButtonContainer {
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
