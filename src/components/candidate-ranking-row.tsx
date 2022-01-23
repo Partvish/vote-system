@@ -7,7 +7,10 @@ type CandidateRankingRowPropsType = {
     votes: number
 }
 
-
+/**
+ * Simple list ui element.
+ * It's used in results-page.ts.
+ */
 const CandidateRankingRow =(props: CandidateRankingRowPropsType)=>{
 
     return <div className="candidateRankingRowContainer">

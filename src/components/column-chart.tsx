@@ -6,6 +6,10 @@ type ColumnChartPropsType = {
     candidates: string[]
 }
 
+/**
+ * Ui element using a 3rd party library.
+ * It creates a bar chart, which represents the number of votes each candidate has.
+ */
 const ColumnChart= (props: ColumnChartPropsType) =>{
     return <VictoryChart domainPadding={20}>
     <VictoryAxis tickFormat={x=>x} />

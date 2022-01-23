@@ -1,49 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import CandidateRankingRow from '../components/candidate-ranking-row';
 import ColumnChart from '../components/column-chart';
-import { FetchWithHeaders } from '../methods/api-call-methods';
 import {BsSortUp, BsSortDown} from 'react-icons/bs';
 import './results-page.css'
+import { useAppSelector } from '../store/api-store';
 
+/**
+ * Main Ui element, Page.
+ * It represents the results page
+ */
 const ResultPage = ()=>{
-    const [rankings, setRankings] = useState<any[]>([]);
-    const [regions, setRegions] = useState<any[]>([]);
+    const [rankings, setRankings] = useState<any[]>(useAppSelector(state=>state.candidatesWithResults));
+    const [regions, setRegions] = useState<any[]>(useAppSelector(state=>state.regions));
     const [selected, setSelected] = useState(-1);
     const [errorMessage, setErrorMessage] = useState("");
     const [isAscending, setIsAscending] = useState(false);
     const [currentList, setCurrentList] = useState<any[]>([]);
-
-    useEffect(()=>{
-        FetchWithHeaders('results', {method: 'GET'})
-            .then( async response=> {
-                if(response.ok){
-                    const data = await response.json();
-                    console.log(data)
-                    if(data.candidate_results){
-                        setRankings(data.candidate_results);
-                    }
-                    else {
-                        setErrorMessage("Oops Something went wrong. Ranking data couldn't be loaded");
-                    }
-                }
-            })
-            FetchWithHeaders('regions', {method: 'GET'})
-            .then( async response=> {
-                if(response.ok){
-                    const data = await response.json();
-                    console.log(data)
-                    if(data.regions){
-                        setRegions(data.regions);
-                       
-                    }
-                    else {
-                        setErrorMessage("Oops Something went wrong. Ranking data couldn't be loaded");
-                    }
-                }
-            })
-    }, [])
-
-
 
     useEffect(()=>{
         const computeRankings = ()=>{
@@ -81,7 +53,7 @@ const ResultPage = ()=>{
                         {isAscending? <BsSortUp />: <BsSortDown />}
                     </button>
                 </div>
-                <div>{ currentList.map((e,i)=> <CandidateRankingRow key={i} name={e.candidate_id} votes={e.total_points} index={i} />) }</div>
+                <div>{ currentList.map((e,i)=> <CandidateRankingRow key={i} name={e.full_name} votes={e.total_points} index={i} />) }</div>
             </div>
 
             <div style={{ maxWidth: 800, flex: 2}}>

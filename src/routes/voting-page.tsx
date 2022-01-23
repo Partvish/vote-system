@@ -4,33 +4,23 @@ import { FetchWithHeaders } from '../methods/api-call-methods';
 import CandidatePickerRow from '../components/candidate-picker-row';
 import CandidateMoveDirection from '../enmus/candidate-move-direction';
 import './voting-page.css'
+import { useAppSelector } from '../store/api-store';
 
+/**
+ * Main Ui element, Page.
+ * It represents the voting page
+ */
 const VotingPage = ()=>
 {
 
     const [errorMessage, setErrorMessage] = useState("");
     const [hideVoting, setHideVoting] = useState(true);
-    const [globalCandidates, setGlobalCandidates] = useState<any[]>([]);
-    const [regionalCandidates, setRegionalCandidates] = useState<any[]>([]);
+    const [globalCandidates, setGlobalCandidates] = useState<any[]>(useAppSelector(state=>state.candidates).filter((e:any)=>e.in_global));
+    const [regionalCandidates, setRegionalCandidates] = useState<any[]>(useAppSelector(state=>state.candidates));
     const [voter, setVoter] = useState<any>({});
 
-
-    useEffect(()=>{
-
-        FetchWithHeaders('candidates', {method: 'GET'} ).then( async response=>{
-            
-            if(response.ok ){
-                const data = await response.json();
-                if(data.candidates.length>0) {
-                    setGlobalCandidates((data.candidates as any[]).filter(e=>e.in_global));
-                    setRegionalCandidates((data.candidates as any[]).filter(e=>!e.in_global));
-                }
-            }
-        })
-    }, [])
-
     const handleVoterKeySubmission= (values: any)=>{
-        
+
         FetchWithHeaders('voters/info', {
             method: 'POST',
             body: JSON.stringify( {
@@ -42,7 +32,7 @@ const VotingPage = ()=>
             if(response.ok && data.voter.id){
                 data.voter['key']=values.voterKey; 
                 setVoter(data.voter);
-                setRegionalCandidates(regionalCandidates.filter(e=>e.in_region.id&&e.in_region.id===data.voter.in_region_id));
+                setRegionalCandidates(regionalCandidates.filter((e:any)=>e.in_region&&e.in_region.id&&e.in_region.id===data.voter.in_region_id));
                 setHideVoting(false);
             }
             else {

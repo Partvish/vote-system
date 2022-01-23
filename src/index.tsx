@@ -6,9 +6,13 @@ import ResultPage from './routes/results-page';
 import VotingPage from './routes/voting-page';
 import LandingPage from './routes/landing-page';
 import { Provider } from 'react-redux';
-import store from './methods/api-store';
+import store from './store/api-store';
 
-
+/**
+ * The application's entry point.
+ * Nested in React-Router and Redux-Provider wrappers there's the App element.
+ * With using nested routes the page fragments have their own url.
+ */
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
@@ -23,8 +27,3 @@ ReactDOM.render(
 </Provider>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-//reportWebVitals();

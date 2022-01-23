@@ -10,7 +10,10 @@ type CandidatePickerRowProps = {
     handleCandidateMovement: (direction: CandidateMoveDirection, id: number)=>void
 }
 
-
+/**
+ * Simple list ui element.
+ * It's used in voting-page.ts to rearrange the order of the candidates.
+ */
 const CandidatePickerRow =(props: CandidatePickerRowProps)=>{
 
     return <div className="candidatePickerRowContainer" >

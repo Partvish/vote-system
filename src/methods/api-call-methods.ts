@@ -1,6 +1,10 @@
 const api = 'https://voting.homework.snapsoft.hu/api/';
 const apiKey = '42zsfvgtXeRlkFqtEmI2w1IK9RyO1LCg';
 
+/**
+ * Helper method. 
+ * It's main functionality is to simplify the fetch function by extracting the reoccuring code.
+ */
 const FetchWithHeaders = (apiPoint: string, requestOptions: any, query: any = {}) => {
     if(!requestOptions.headers) {
         requestOptions.headers = {}
@@ -18,9 +22,6 @@ const FetchWithHeaders = (apiPoint: string, requestOptions: any, query: any = {}
     return fetch(url, requestOptions);
     
 }
-
-
-
 
 
 export {

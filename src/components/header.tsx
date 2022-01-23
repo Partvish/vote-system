@@ -2,6 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import './header.css';
 
+/**
+ * Main UI element.
+ * It represents the Header element.
+ * It contains a title and a custom link button to each page.
+ */
 function Header(){
     return <header style={{marginBottom: 10}} className="menuBackground">
         <div className="menuBorder">

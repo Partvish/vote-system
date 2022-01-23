@@ -1,6 +1,11 @@
 import React from 'react';
 import './footer.css';
 
+/**
+ * Main UI element.
+ * It represents the Footer element.
+ * It contains some example texts.
+ */
 function Footer(){
     return <footer style={{marginTop: 10}} className="footerBackground">
         <div className="footerBorder">

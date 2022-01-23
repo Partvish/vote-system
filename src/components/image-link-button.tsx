@@ -8,6 +8,10 @@ type ImageLinkButtonPropsType = {
     text: string
 }
 
+/**
+ * Simple Ui element.
+ * It's used in the landing-page.tsx, it represents an image button, that redirects the page to the given url.
+ */
 const ImageLinkButton = ( props : ImageLinkButtonPropsType)=>{
     return <div style={{ maxWidth: 600, maxHeight: 400, margin: 10}} className="grow">
     <Link to={props.link}>
