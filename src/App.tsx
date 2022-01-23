@@ -4,7 +4,6 @@ import Footer from './components/footer';
 import {Outlet} from 'react-router-dom';
 import { FetchWithHeaders } from './methods/api-call-methods';
 import { useDispatch } from 'react-redux';
-import { useAppSelector } from './store/api-store';
 /**
  * Main Ui element
  * It represents a wrapper react page, which contains the header, footer and the current page fragment.
@@ -52,15 +51,10 @@ const App =(props: any)=>{
 
   return (
     <div style={{display: 'flex', flexDirection: 'column'}} >
-      
       <Header />
-      <div >
       <div style={{maxWidth: 1200, margin:'auto', marginBottom: 100, marginTop: 125, padding: 5}}>
         <Outlet />
-        
       </div>
-      </div>
-      {useAppSelector(state=> state.isLoading) && <div/>}
       <Footer />
     </div>
   );

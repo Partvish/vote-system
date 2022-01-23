@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ImageLinkButton from '../components/image-link-button';
-import { useAppSelector } from '../store/api-store';
+import store, { useAppSelector } from '../store/api-store';
 import './landing-page.css';
 
 /**
@@ -9,6 +9,12 @@ import './landing-page.css';
  */
 const LandingPage = ()=> {
     const [results, setResults] = useState<any[]>(useAppSelector(state=>state.candidatesWithResults).filter((e:any)=>e.in_region==null));
+    useEffect(()=>{
+        const handleChange=()=>{
+            setResults(store.getState().candidatesWithResults.filter((e:any)=>e.in_region==null))
+        }
+        store.subscribe(handleChange)
+    }, [])
 
     return <main>
         <h1>Welcome to the Voting System Application!</h1>

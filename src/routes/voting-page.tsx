@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { ErrorMessage, Formik, Form, Field } from 'formik';
 import { FetchWithHeaders } from '../methods/api-call-methods';
 import CandidatePickerRow from '../components/candidate-picker-row';
 import CandidateMoveDirection from '../enmus/candidate-move-direction';
 import './voting-page.css'
-import { useAppSelector } from '../store/api-store';
+import store, { useAppSelector } from '../store/api-store';
 
 /**
  * Main Ui element, Page.
@@ -18,6 +18,14 @@ const VotingPage = ()=>
     const [globalCandidates, setGlobalCandidates] = useState<any[]>(useAppSelector(state=>state.candidates).filter((e:any)=>e.in_global));
     const [regionalCandidates, setRegionalCandidates] = useState<any[]>(useAppSelector(state=>state.candidates));
     const [voter, setVoter] = useState<any>({});
+
+    useEffect(()=>{
+        const handleChange=()=>{
+            setGlobalCandidates(store.getState().candidates.filter((e:any)=>e.in_global))
+            setRegionalCandidates(store.getState().candidates)
+        }
+        store.subscribe(handleChange)
+    }, [])
 
     const handleVoterKeySubmission= (values: any)=>{
 

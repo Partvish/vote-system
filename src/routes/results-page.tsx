@@ -3,7 +3,7 @@ import CandidateRankingRow from '../components/candidate-ranking-row';
 import ColumnChart from '../components/column-chart';
 import {BsSortUp, BsSortDown} from 'react-icons/bs';
 import './results-page.css'
-import { useAppSelector } from '../store/api-store';
+import store, { useAppSelector } from '../store/api-store';
 
 /**
  * Main Ui element, Page.
@@ -13,7 +13,6 @@ const ResultPage = ()=>{
     const [rankings, setRankings] = useState<any[]>(useAppSelector(state=>state.candidatesWithResults));
     const [regions, setRegions] = useState<any[]>(useAppSelector(state=>state.regions));
     const [selected, setSelected] = useState(-1);
-    const [errorMessage, setErrorMessage] = useState("");
     const [isAscending, setIsAscending] = useState(false);
     const [currentList, setCurrentList] = useState<any[]>([]);
 
@@ -35,11 +34,16 @@ const ResultPage = ()=>{
         computeRankings();
     }, [isAscending, selected, rankings, regions])
 
-    
+    useEffect(()=>{
+        const handleChange=()=>{
+            setRankings(store.getState().candidatesWithResults);
+            setRegions(store.getState().regions);
+        }
+        store.subscribe(handleChange)
+    }, [])
 
     return <main>
         <h1>Election Results</h1>
-        {errorMessage && <div>{errorMessage}</div>}
         <div style={{marginBottom: 15}}>Here you can see the current election results. Choose your region to get the latest news, or choose global to see the candidates who run for the country. </div>
         <div style={{display: 'flex', justifyContent: 'space-evenly', maxWidth: 1200, maxHeight: 1200, flexWrap: 'wrap'}}>
             <div style={{flex: 1, minWidth: 320}}>

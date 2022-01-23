@@ -1,11 +1,10 @@
-import {applyMiddleware, configureStore} from "@reduxjs/toolkit";
+import { configureStore} from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { CandidateReducer } from "./candidates-reducers";
 import { ResultsReducer } from "./results-reducers";
 import CWRMiddleWare from './candidate-with-result-middleware';
 import { CandidatesWithResultsReducer } from "./candidates-with-results";
 import { RegionsReducer } from "./regions";
-import { isLoadingReducer } from "./load-reducer";
 
 /**
  * Redux store.
@@ -17,7 +16,6 @@ const store= configureStore ({
         candidates: CandidateReducer,
         candidatesWithResults: CandidatesWithResultsReducer,
         regions: RegionsReducer,
-        isLoading: isLoadingReducer
     },
     middleware: [CWRMiddleWare,]
     
