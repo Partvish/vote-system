@@ -13,9 +13,8 @@ const ImageLinkButton = ( props : ImageLinkButtonPropsType)=>{
     <Link to={props.link}>
          <div>
              <div style={{position: 'absolute', color: 'white', fontWeight: 'bold', fontSize: 30, opacity: 1, background: 'black'}}>{props.text}</div>
-             <picture>
-                 <img src={props.imgLink} style={{objectFit: 'fill', width: 400, height: 300}} />
-             </picture>
+
+                 <img src={props.imgLink} style={{objectFit: 'fill', width: 320, height: 250}} alt ={`${props.text} image`}/>
          </div>
      </Link>
  </div>

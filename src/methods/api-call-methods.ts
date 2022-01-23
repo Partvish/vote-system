@@ -16,10 +16,13 @@ const FetchWithHeaders = (apiPoint: string, requestOptions: any, query: any = {}
 
     console.log(`${requestOptions.method} method call sent, url: ${url}`)
     return fetch(url, requestOptions);
-
+    
 }
 
 
+
+
+
 export {
-    FetchWithHeaders
+    FetchWithHeaders,
 }

@@ -3,7 +3,7 @@ import { ErrorMessage, Formik, Form, Field } from 'formik';
 import { FetchWithHeaders } from '../methods/api-call-methods';
 import CandidatePickerRow from '../components/candidate-picker-row';
 import CandidateMoveDirection from '../enmus/candidate-move-direction';
-
+import './voting-page.css'
 
 const VotingPage = ()=>
 {
@@ -42,7 +42,7 @@ const VotingPage = ()=>
             if(response.ok && data.voter.id){
                 data.voter['key']=values.voterKey; 
                 setVoter(data.voter);
-                setRegionalCandidates(regionalCandidates.filter(e=>e.in_region.id&&e.in_region.id==data.voter.in_region_id));
+                setRegionalCandidates(regionalCandidates.filter(e=>e.in_region.id&&e.in_region.id===data.voter.in_region_id));
                 setHideVoting(false);
             }
             else {
@@ -100,7 +100,8 @@ const VotingPage = ()=>
                 candidates.push(candidate);
                 break;
             case CandidateMoveDirection.CandidateUp:
-                candidates.splice(index-1, 0, candidate);
+                
+                candidates.splice( (index-1<0)? 0: index-1, 0, candidate);
                 break;
             case CandidateMoveDirection.CandidateDown:
                 candidates.splice(index+1, 0, candidate);
@@ -121,25 +122,36 @@ const VotingPage = ()=>
 
     return <main>
         <h1>Cast your vote</h1>
-        <div>Your vote counts!</div>
-        { errorMessage && <div>{errorMessage}</div>}
+        <div style={{marginBottom: 10,}}>Your vote counts!</div>
+        { errorMessage && <div className="votingPageErrorMessage" style={{marginBottom: 10}}>{errorMessage}</div>}
         <Formik initialValues={{voterKey: ""}} onSubmit={handleVoterKeySubmission}> 
             {({
-                isSubmitting
+                isSubmitting,
+                isValid
             })=>(
             <Form>
-                <label>Your Voter Id:</label>
-                <Field type="text" name="voterKey"/>
-                <ErrorMessage name="voterKey" component="div"/>
-                <button type="submit" disabled={isSubmitting}>
-                    Submit
+                <div style={{ fontSize: 12, color: '#673AB7', marginLeft: 5}}>Enter your Voter Key here:</div>
+                <Field type="text" name="voterKey" validate={(value: string)=>{
+                    let error='';
+                    if(value.length>32 || value.length<32)
+                        error += 'The key format is off. Please recheck your key, it should be 32 character long.';
+                    else if(/[^a-zA-Z0-9]/.test(value))
+                        error += 'The key format is off. Please recheck your key, it shouldn\'t contain special characters.';
+                    return error;
+                }} />
+                
+                <button className="votingPageButton grow" type="submit" style={{marginLeft: 5}} disabled={isSubmitting || !isValid}>
+                    Check
                 </button>
+                <ErrorMessage name="voterKey" component="div" className="votingPageErrorMessage"/>
             </Form>
             )}
         </Formik>
         { (hideVoting)? null :  <div>
-            <h3>Regional candidates</h3>
-            <div>
+            <h3 style={{marginBottom: 10}}>Regional candidates</h3>
+            <div style={{marginBottom: 15}}>Rearrange your candidates, based on your preference. The top most candidate is your first choice.</div>
+            <div style={{maxWidth: 600}}><hr  /></div>
+            <div style={{border: '1px solid #673AB7', maxWidth: 410, padding: 5}}>
                 {regionalCandidates.map((e, index)=>
                 <CandidatePickerRow 
                     key={index} 
@@ -148,8 +160,10 @@ const VotingPage = ()=>
                     handleCandidateMovement={(direction, id)=>handleCandidateMovement(direction, id, false)}
                 />)}
             </div>
-            <h3>Global candidates</h3>
-            <div>
+            <h3 style={{marginBottom: 10}}>Global candidates</h3>
+            <div style={{marginBottom: 15}}>Rearrange your candidates, based on your preference. The top most candidate is your first choice.</div>
+            <div style={{maxWidth: 600}}><hr  /></div>
+            <div style={{border: '1px solid #673AB7', maxWidth: 410, padding: 5, marginBottom: 15}}>
                 {globalCandidates.map((e, index)=>
                 <CandidatePickerRow 
                     key={index} 
@@ -158,7 +172,7 @@ const VotingPage = ()=>
                     handleCandidateMovement={(direction, id)=> handleCandidateMovement(direction, id, true)}
                 />)}
             </div>
-            <button onClick={handleVoteSubmission}> Submit </button>
+            <button className="votingPageButton grow" onClick={handleVoteSubmission}> Submit </button>
         </div>}
         </main>;
 }

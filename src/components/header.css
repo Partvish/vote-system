@@ -1,7 +1,11 @@
 .menuBackground{
+    position: fixed;
+    top: 0;
+    width: 100%;
     background-color: #512DA8;
     color: #FFFFFF;
     border-bottom: black 2px solid;
+    z-index: 10;
 }
 
 
@@ -39,5 +43,11 @@
 .menuTitle{
     margin-top: 0;
     padding-top: 15px;
+    margin-bottom: 10px;
+    color: white;
+}
 
+.headerHr{
+    stroke: black;
+    border: 1px solid black
 }

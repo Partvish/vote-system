@@ -1,5 +1,8 @@
 import React from 'react';
 import CandidateMoveDirection from '../enmus/candidate-move-direction';
+import {BiArrowToTop, BiArrowToBottom, BiDownArrowAlt, BiUpArrowAlt } from 'react-icons/bi'
+
+import './candidate-picker-row.css';
 
 type CandidatePickerRowProps = {
     name: string,
@@ -10,21 +13,27 @@ type CandidatePickerRowProps = {
 
 const CandidatePickerRow =(props: CandidatePickerRowProps)=>{
 
-    return <div style={{display: "flex"}}>
-        <div>{props.name}</div>
-        <button onClick={e=>props.handleCandidateMovement(CandidateMoveDirection.CandidateTop, props.index)}>
-            fel sokat
-        </button>
-        <button onClick={e=>props.handleCandidateMovement(CandidateMoveDirection.CandidateUp, props.index)} >
-            fel egyet
-        </button>
-        <button onClick={e=>props.handleCandidateMovement(CandidateMoveDirection.CandidateDown, props.index)} >
-            le egyet
-        </button>
-        <button onClick={e=>props.handleCandidateMovement(CandidateMoveDirection.CandidateBottom, props.index)} >
-            le sokat
-        </button>
+    return <div className="candidatePickerRowContainer" >
+            <div style={{display: 'flex'}}>
+                <div style={{marginRight: 10, fontWeight: 'bold'}}>{`${props.index + 1}.`}</div>
+            <div className="candidatePickerRowName">{props.name}</div>
+            </div>
+                <div>
+                    <button className="candidatePickerRowButton" onClick={e=>props.handleCandidateMovement(CandidateMoveDirection.CandidateTop, props.index)}>
+                        <BiArrowToTop />
+                    </button>
+                    <button className="candidatePickerRowButton" onClick={e=>props.handleCandidateMovement(CandidateMoveDirection.CandidateUp, props.index)} >
+                        <BiUpArrowAlt />
+                    </button>
+                    <button className="candidatePickerRowButton" onClick={e=>props.handleCandidateMovement(CandidateMoveDirection.CandidateDown, props.index)} >
+                        <BiDownArrowAlt />
+                    </button>
+                    <button className="candidatePickerRowButton" onClick={e=>props.handleCandidateMovement(CandidateMoveDirection.CandidateBottom, props.index)} >
+                        <BiArrowToBottom />
+                    </button>
+                </div>
     </div>
+    
 }
 
 export default CandidatePickerRow;

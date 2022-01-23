@@ -1,0 +1,31 @@
+.candidatePickerRowContainer{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 400px;
+    justify-content: space-between;
+    padding: 3px;
+}
+
+.candidatePickerRowContainer:hover{
+    background-color: #D1C4E9;
+}
+
+.candidatePickerRowButton{
+    box-shadow: none;
+    width: 25px;
+    height: 25px;
+    background-color: transparent;
+    color: #673AB7;
+    border: none;
+    cursor: pointer;
+}
+
+.candidatePickerRowButton:hover {
+    background-color: #673AB7;
+    color: white;
+}
+
+.candidatePickerRowButton:active {
+    background-color: #D1C4E9;
+    color: black;
+}

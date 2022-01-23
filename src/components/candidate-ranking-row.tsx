@@ -1,7 +1,8 @@
 import React from 'react';
-import CandidateMoveDirection from '../enmus/candidate-move-direction';
+import './candidate-ranking-row.css';
 
 type CandidateRankingRowPropsType = {
+    index: number,
     name: string,
     votes: number
 }
@@ -9,9 +10,10 @@ type CandidateRankingRowPropsType = {
 
 const CandidateRankingRow =(props: CandidateRankingRowPropsType)=>{
 
-    return <div style={{display: "flex"}}>
-        <div>{props.name}</div>
-        <div>{props.votes}</div>
+    return <div className="candidateRankingRowContainer">
+        <div className="candidateRankingRowIndex">{`${props.index+1}.`}</div>
+        <div className="candidateRankingRowName" >{props.name}</div>
+        <div className="candidateRankingRowVote" >{props.votes}</div>
     </div>
 }
 
