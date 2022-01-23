@@ -1,0 +1,20 @@
+.candidateRankingRowContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.candidateRankingRowName{
+    margin-right: 10px;
+}
+
+.candidateRankingRowIndex{
+    font-weight: bold;
+    margin-right: 10px;
+    min-width: 23px;
+}
+
+.candidateRankingRowVote{
+    font-weight: bold;
+    text-align: right;
+    min-width: 23px;
+}

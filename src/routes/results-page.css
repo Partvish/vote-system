@@ -1,0 +1,23 @@
+select{
+    padding: 10px;
+    margin: 5px;
+    border-color: #673AB7;
+    border-style: solid;
+    background-color: #D1C4E9;
+    color: #512DA8;
+    font-weight: bold;
+}
+
+.sortButton{
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    color: #512DA8;
+    font-weight: bold;
+    background-color: transparent;
+
+}
+
+.sortButton:hover{
+    background-color: #D1C4E9;
+}

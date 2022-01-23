@@ -1,0 +1,19 @@
+.footerBackground {
+    position: fixed;
+    bottom:0;
+    width:100%;
+    height:100px;   /* Height of the footer */
+    background-color:  #512DA8;
+    color: #FFFFFF;
+    border-top: black 2px solid;
+    background-attachment: scroll;
+    z-index: 10;
+ }
+
+ .footerBorder{
+     max-width: 1200px;
+     margin: auto;
+     padding: 15px;
+     font-size: 10px;
+     text-align: center;
+ }
